@@ -1,8 +1,11 @@
 package com.manutencao.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.manutencao.infrastructure.LaboratorioRepository;
+import com.manutencao.model.Status;
 import com.manutencao.model.laboratorio.Laboratorio;
 
 public class ObterLaboratorioServiceImpl implements ObterLaboratorioService {
@@ -19,4 +22,9 @@ public class ObterLaboratorioServiceImpl implements ObterLaboratorioService {
 		return laboratorioRepository.getBy(id);
 	}
 
+	@Override
+	public List<Laboratorio> obterLaboratoriosAtivos() {
+		return laboratorioRepository.listByStatus(Status.ATIVO);
+	}
+	
 }

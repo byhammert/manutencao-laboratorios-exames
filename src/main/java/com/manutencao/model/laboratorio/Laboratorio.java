@@ -2,17 +2,21 @@ package com.manutencao.model.laboratorio;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
+
 import com.manutencao.model.Status;
 import com.manutencao.model.exame.Exame;
 import com.manutencao.util.IDUtil;
 
 public class Laboratorio {
 	
-	private final String id;
+	private String id;
 	private String nome;
 	private String endereco;
 	private Status status;
 	private List<Exame> exames;
+	
+	private Laboratorio() {}
 	
 	public Laboratorio(String nome, String endereco, Status status, List<Exame> exames) {
 		super();
@@ -23,6 +27,10 @@ public class Laboratorio {
 		this.exames = exames;
 	}
 	
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -57,6 +65,12 @@ public class Laboratorio {
 
 	public void setExames(List<Exame> exames) {
 		this.exames = exames;
+	}
+	
+	public static Laboratorio clone(Laboratorio laboratorio) {
+		Laboratorio target = new Laboratorio();
+		BeanUtils.copyProperties(laboratorio, target);
+		return target;
 	}
 
 	@Override

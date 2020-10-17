@@ -7,19 +7,20 @@ import com.manutencao.infrastructure.LaboratorioRepository;
 import com.manutencao.model.laboratorio.Laboratorio;
 
 @Service
-public class CadastroLaboratorioServiceImpl implements CadastroLaboratorioService {
+public class SalvaLaboratorioServiceImpl implements SalvaLaboratorioService {
 
 	private LaboratorioRepository laboratorioRepository;
 	
 	@Autowired
-	public CadastroLaboratorioServiceImpl(LaboratorioRepository laboratorioRepository) {
+	public SalvaLaboratorioServiceImpl(LaboratorioRepository laboratorioRepository) {
 		this.laboratorioRepository = laboratorioRepository;
 	}
 	
 	@Override
-	public Laboratorio cadastrar(Laboratorio laboratorio) {
-		laboratorioRepository.save(laboratorio);
-		return laboratorio;
+	public Laboratorio salvar(Laboratorio laboratorio) {
+		Laboratorio laboratorioSalvo = Laboratorio.clone(laboratorio); 
+		laboratorioRepository.save(laboratorioSalvo);
+		return laboratorioSalvo;
 	}
 
 }
