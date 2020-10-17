@@ -11,8 +11,6 @@ public class IDUtilTest {
 		final String id1 = IDUtil.gerarID();
 		final String id2 = IDUtil.gerarID();
 		
-		System.out.println(id1);
-		
 		assertThat(id1).isNotNull().isNotEmpty();
 		assertThat(id2).isNotNull().isNotEmpty();
 		assertThat(id1).isNotEqualTo(id2);

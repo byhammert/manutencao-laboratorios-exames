@@ -5,5 +5,6 @@ import com.manutencao.model.laboratorio.Laboratorio;
 public interface LaboratorioRepository {
 	
 	void save(Laboratorio laboratorio);
+	Laboratorio getBy(String id);
 
 }

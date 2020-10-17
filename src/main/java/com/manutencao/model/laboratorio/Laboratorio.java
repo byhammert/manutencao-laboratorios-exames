@@ -4,10 +4,11 @@ import java.util.List;
 
 import com.manutencao.model.Status;
 import com.manutencao.model.exame.Exame;
+import com.manutencao.util.IDUtil;
 
 public class Laboratorio {
 	
-	private String id;
+	private final String id;
 	private String nome;
 	private String endereco;
 	private Status status;
@@ -15,6 +16,7 @@ public class Laboratorio {
 	
 	public Laboratorio(String nome, String endereco, Status status, List<Exame> exames) {
 		super();
+		this.id = IDUtil.gerarID();
 		this.nome = nome;
 		this.endereco = endereco;
 		this.status = status;
@@ -23,10 +25,6 @@ public class Laboratorio {
 	
 	public String getId() {
 		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getNome() {
@@ -63,8 +61,8 @@ public class Laboratorio {
 
 	@Override
 	public String toString() {
-		return "Laboratorio [nome=" + nome + ", endereco=" + endereco + ", status=" + status + ", exames=" + exames
-				+ "]";
+		return "Laboratorio [id=" + id + ", nome=" + nome + ", endereco=" + endereco + ", status=" + status
+				+ ", exames=" + exames + "]";
 	}
-	
+
 }

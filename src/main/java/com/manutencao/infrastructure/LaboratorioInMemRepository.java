@@ -14,4 +14,9 @@ public class LaboratorioInMemRepository implements LaboratorioRepository{
 		map.put(laboratorio.getId(), laboratorio);
 	}
 
+	@Override
+	public Laboratorio getBy(String id) {
+		return map.get(id);
+	}
+
 }

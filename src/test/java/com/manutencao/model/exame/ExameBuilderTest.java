@@ -4,9 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
+import com.manutencao.mock.LaboratorioMock;
 import com.manutencao.model.Status;
 import com.manutencao.model.laboratorio.Laboratorio;
-import com.manutencao.model.laboratorio.LaboratorioBuilder;
 
 public class ExameBuilderTest {
 	
@@ -20,7 +20,7 @@ public class ExameBuilderTest {
 										.comNome(nome)
 										.comStatus(status)
 										.comTipoExame(tipoExame)
-										.addLaboratorio(obterLaboratorio())
+										.addLaboratorio(LaboratorioMock.obterLaboratorio())
 										.build();
 		
 		assertThat(exame).isNotNull();
@@ -30,19 +30,10 @@ public class ExameBuilderTest {
 		assertThat(exame.getLaboratorios()).isNotNull().isNotEmpty();
 		
 		final Laboratorio laboratorio = exame.getLaboratorios().get(0);
-		assertThat(laboratorio.getNome()).isEqualTo("Nome Laboratório");
-		assertThat(laboratorio.getEndereco()).isEqualTo("Endereço Laboratório");
+		assertThat(laboratorio.getNome()).isEqualTo("Laboratório Teste");
+		assertThat(laboratorio.getEndereco()).isEqualTo("Endereço Teste");
 		assertThat(laboratorio.getStatus()).isEqualTo(Status.ATIVO);
 		assertThat(laboratorio.getExames()).isNotNull().isEmpty();
-	}
-	
-	private Laboratorio obterLaboratorio() {
-		final Laboratorio laboratorio = LaboratorioBuilder.builder()
-															.comNome("Nome Laboratório")
-															.comEndereco("Endereço Laboratório")
-															.comStatus(Status.ATIVO)
-															.build();
-		return laboratorio;
 	}
 
 }

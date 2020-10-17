@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import com.manutencao.mock.LaboratorioMock;
 import com.manutencao.model.Status;
 import com.manutencao.model.laboratorio.Laboratorio;
 
@@ -66,7 +67,7 @@ public class ExameTest {
 		final Laboratorio laboratorio = exame.getLaboratorios().get(0);
 		
 		assertThat(laboratorio.getNome()).isEqualTo("Laboratório Teste");
-		assertThat(laboratorio.getEndereco()).isEqualTo("Endereço Laboratório");
+		assertThat(laboratorio.getEndereco()).isEqualTo("Endereço Teste");
 		assertThat(laboratorio.getStatus()).isEqualTo(Status.ATIVO);
 		assertThat(laboratorio.getExames()).isNotNull().isEmpty();
 		
@@ -75,12 +76,8 @@ public class ExameTest {
 	
 	private List<Laboratorio> obterLaboratorios() {
 		final List<Laboratorio> laboratorios = new ArrayList<>();
-		laboratorios.add(obterLaboratorio());
+		laboratorios.add(LaboratorioMock.obterLaboratorio());
 		return laboratorios;
-	}
-	
-	private Laboratorio obterLaboratorio() {
-		return new Laboratorio("Laboratório Teste", "Endereço Laboratório", Status.ATIVO, new ArrayList<>());
 	}
 
 }

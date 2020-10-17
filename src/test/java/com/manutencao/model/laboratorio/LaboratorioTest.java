@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import com.manutencao.mock.ExameMock;
 import com.manutencao.model.Status;
 import com.manutencao.model.exame.Exame;
 import com.manutencao.model.exame.TipoExame;
@@ -30,6 +31,7 @@ public class LaboratorioTest {
 		laboratorio.setEndereco(novoEndereco);
 		laboratorio.setStatus(novoStatus);
 		
+		assertThat(laboratorio.getId()).isNotNull();
 		assertThat(laboratorio.getNome()).isEqualTo(novoNome);
 		assertThat(laboratorio.getEndereco()).isEqualTo(novoEndereco);
 		assertThat(laboratorio.getStatus()).isEqualTo(novoStatus);
@@ -41,10 +43,11 @@ public class LaboratorioTest {
 		final String endereco = "Endereço Teste";
 		final Status status = Status.ATIVO;
 		final List<Exame> exames = obterExames();
-		final String valorEsperado = "Laboratorio [nome=" + nome + ", endereco=" + endereco + ", status=" + status + ", exames=" + exames
-				+ "]";
 		
 		final Laboratorio laboratorio = new Laboratorio(nome, endereco, status, exames);
+		
+		final String valorEsperado = "Laboratorio [id=" + laboratorio.getId() + ", nome=" + nome + ", endereco=" + endereco + ", status=" + status
+				+ ", exames=" + exames + "]";
 		
 		assertThat(laboratorio.toString()).isEqualTo(valorEsperado);
 	}
@@ -57,6 +60,7 @@ public class LaboratorioTest {
 		
 		final Laboratorio laboratorio = new Laboratorio(nome, endereco, status, exames);
 		
+		assertThat(laboratorio.getId()).isNotNull();
 		assertThat(laboratorio.getNome()).isEqualTo(nome);
 		assertThat(laboratorio.getEndereco()).isEqualTo(endereco);
 		assertThat(laboratorio.getStatus()).isEqualTo(status);
@@ -64,9 +68,9 @@ public class LaboratorioTest {
 		
 		final Exame exame = laboratorio.getExames().get(0);
 		
-		assertThat(exame.getNome()).isEqualTo("Exame Teste");
+		assertThat(exame.getNome()).isEqualTo("Nome Exame");
 		assertThat(exame.getStatus()).isEqualTo(Status.ATIVO);
-		assertThat(exame.getTipoExame()).isEqualTo(TipoExame.ANALISE_CLINICA);
+		assertThat(exame.getTipoExame()).isEqualTo(TipoExame.IMAGEM);
 		assertThat(exame.getLaboratorios()).isNotNull().isEmpty();
 		
 		return laboratorio;
@@ -74,12 +78,8 @@ public class LaboratorioTest {
 	
 	private List<Exame> obterExames() {
 		final List<Exame> exames = new ArrayList<>();
-		exames.add(obterExame());
+		exames.add(ExameMock.obterExame());
 		return exames;
-	}
-	
-	private Exame obterExame() {
-		return new Exame("Exame Teste", TipoExame.ANALISE_CLINICA, Status.ATIVO, new ArrayList<>());
 	}
 
 }
