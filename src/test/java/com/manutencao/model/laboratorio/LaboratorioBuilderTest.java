@@ -1,13 +1,13 @@
-package com.manutencao.model.laboratorios;
+package com.manutencao.model.laboratorio;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
 import com.manutencao.model.Status;
-import com.manutencao.model.exames.Exame;
-import com.manutencao.model.exames.ExameBuilder;
-import com.manutencao.model.exames.TipoExame;
+import com.manutencao.model.exame.Exame;
+import com.manutencao.model.exame.ExameBuilder;
+import com.manutencao.model.exame.TipoExame;
 
 public class LaboratorioBuilderTest {
 	

@@ -1,9 +1,9 @@
-package com.manutencao.model.exames;
+package com.manutencao.model.exame;
 
 import java.util.List;
 
 import com.manutencao.model.Status;
-import com.manutencao.model.laboratorios.Laboratorio;
+import com.manutencao.model.laboratorio.Laboratorio;
 
 public class Exame {
 	

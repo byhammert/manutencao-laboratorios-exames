@@ -1,10 +1,10 @@
-package com.manutencao.model.laboratorios;
+package com.manutencao.model.laboratorio;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.manutencao.model.Status;
-import com.manutencao.model.exames.Exame;
+import com.manutencao.model.exame.Exame;
 
 public class LaboratorioBuilder {
 	

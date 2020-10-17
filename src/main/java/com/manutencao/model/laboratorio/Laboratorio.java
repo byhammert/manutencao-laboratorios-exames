@@ -1,12 +1,13 @@
-package com.manutencao.model.laboratorios;
+package com.manutencao.model.laboratorio;
 
 import java.util.List;
 
 import com.manutencao.model.Status;
-import com.manutencao.model.exames.Exame;
+import com.manutencao.model.exame.Exame;
 
 public class Laboratorio {
 	
+	private String id;
 	private String nome;
 	private String endereco;
 	private Status status;
@@ -18,6 +19,14 @@ public class Laboratorio {
 		this.endereco = endereco;
 		this.status = status;
 		this.exames = exames;
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getNome() {
