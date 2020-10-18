@@ -14,14 +14,14 @@ import com.manutencao.mock.LaboratorioMock;
 import com.manutencao.model.Status;
 import com.manutencao.model.laboratorio.Laboratorio;
 
-public class ObterLaboratorioServiceImplTest {
+public class ConsultaLaboratorioServiceImplTest {
 	private LaboratorioRepository laboratorioRepository;
-	private ObterLaboratorioService service;
+	private ConsultaLaboratorioService service;
 	
 	@BeforeEach
 	public void setup() {
 		laboratorioRepository = mock(LaboratorioRepository.class);
-		service = new ObterLaboratorioServiceImpl(laboratorioRepository);
+		service = new ConsultaLaboratorioServiceImpl(laboratorioRepository);
 	}
 	
 	@Test

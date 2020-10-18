@@ -42,10 +42,9 @@ public class ExameTest {
 		final Status status = Status.ATIVO;
 		final List<Laboratorio> laboratorios = obterLaboratorios();
 		
-		final String valorEsperado = "Exame [nome=" + nome + ", tipoExame=" + tipoExame + ", status=" + status + ", laboratorios="
-				+ laboratorios + "]";
-		
 		final Exame exame = new Exame(nome, tipoExame, status, laboratorios);
+		final String valorEsperado = "Exame [id=" + exame.getId() + ", nome=" + nome + ", tipoExame=" + tipoExame + ", status=" + status + ", laboratorios="
+				+ laboratorios + "]";
 		
 		assertThat(exame.toString()).isEqualTo(valorEsperado);
 	}

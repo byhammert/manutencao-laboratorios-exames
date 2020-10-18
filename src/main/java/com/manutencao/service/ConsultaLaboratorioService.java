@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.manutencao.model.laboratorio.Laboratorio;
 
-public interface ObterLaboratorioService {
+public interface ConsultaLaboratorioService {
 	
 	Laboratorio obter(String id);
 	List<Laboratorio> obterLaboratoriosAtivos();

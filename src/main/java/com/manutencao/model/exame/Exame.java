@@ -2,22 +2,37 @@ package com.manutencao.model.exame;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
+
 import com.manutencao.model.Status;
 import com.manutencao.model.laboratorio.Laboratorio;
+import com.manutencao.util.IDUtil;
 
 public class Exame {
 	
+	private String id;
 	private String nome;
 	private TipoExame tipoExame;
 	private Status status;
 	private List<Laboratorio> laboratorios;
 	
+	private Exame() {}
+	
 	public Exame(String nome, TipoExame tipoExame, Status status, List<Laboratorio> laboratorios) {
 		super();
+		this.id = IDUtil.gerarID();
 		this.nome = nome;
 		this.tipoExame = tipoExame;
 		this.status = status;
 		this.laboratorios = laboratorios;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getId() {
+		return id;
 	}
 
 	public String getNome() {
@@ -51,10 +66,16 @@ public class Exame {
 	public void setLaboratorios(List<Laboratorio> laboratorios) {
 		this.laboratorios = laboratorios;
 	}
+	
+	public static Exame clone(Exame exame) {
+		Exame target = new Exame();
+		BeanUtils.copyProperties(exame, target);
+		return target;
+	}
 
 	@Override
 	public String toString() {
-		return "Exame [nome=" + nome + ", tipoExame=" + tipoExame + ", status=" + status + ", laboratorios="
+		return "Exame [id=" + id + ", nome=" + nome + ", tipoExame=" + tipoExame + ", status=" + status + ", laboratorios="
 				+ laboratorios + "]";
 	}
 	

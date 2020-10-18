@@ -7,8 +7,13 @@ import org.springframework.context.annotation.Configuration;
 public class RepositoryConfiguration {
 	
 	@Bean
-	public LaboratorioRepository createRepository() {
+	public LaboratorioRepository createLaboratorioRepository() {
 		return new LaboratorioInMemRepository();
+	}
+	
+	@Bean
+	public ExameRepository createExameRepository() {
+		return new ExameInMemRepository();
 	}
 
 }
