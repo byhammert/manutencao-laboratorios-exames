@@ -1,4 +1,4 @@
-package com.manutencao.service;
+package com.manutencao.service.exame;
 
 import java.util.List;
 

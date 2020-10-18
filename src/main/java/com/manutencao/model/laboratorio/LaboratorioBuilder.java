@@ -39,6 +39,11 @@ public class LaboratorioBuilder {
 		return this;
 	}
 	
+	public LaboratorioBuilder addAllExame(List<Exame> exames) {
+		this.exames.addAll(exames);
+		return this;
+	}
+	
 	public Laboratorio build() {
 		return new Laboratorio(nome, endereco, status, exames);
 	}

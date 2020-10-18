@@ -1,4 +1,4 @@
-package com.manutencao.service;
+package com.manutencao.service.laboratorio;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.manutencao.service;
+package com.manutencao.service.laboratorio;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -7,12 +7,12 @@ import com.manutencao.infrastructure.LaboratorioRepository;
 import com.manutencao.model.laboratorio.Laboratorio;
 
 @Service
-public class SalvaLaboratorioServiceImpl implements SalvaLaboratorioService {
+public class CadastroLaboratorioServiceImpl implements CadastroLaboratorioService {
 
 	private LaboratorioRepository laboratorioRepository;
 	
 	@Autowired
-	public SalvaLaboratorioServiceImpl(LaboratorioRepository laboratorioRepository) {
+	public CadastroLaboratorioServiceImpl(LaboratorioRepository laboratorioRepository) {
 		this.laboratorioRepository = laboratorioRepository;
 	}
 	

@@ -1,4 +1,4 @@
-package com.manutencao.service;
+package com.manutencao.service.laboratorio;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doNothing;
@@ -9,18 +9,17 @@ import org.junit.jupiter.api.Test;
 
 import com.manutencao.infrastructure.LaboratorioRepository;
 import com.manutencao.mock.LaboratorioMock;
-import com.manutencao.model.Status;
 import com.manutencao.model.laboratorio.Laboratorio;
 
-public class SalvaLaboratorioServiceImplTest {
+public class CadastroLaboratorioServiceImplTest {
 	
 	private LaboratorioRepository laboratorioRepository;
-	private SalvaLaboratorioService service;
+	private CadastroLaboratorioService service;
 	
 	@BeforeEach
 	public void setup() {
 		laboratorioRepository = mock(LaboratorioRepository.class);
-		service = new SalvaLaboratorioServiceImpl(laboratorioRepository);
+		service = new CadastroLaboratorioServiceImpl(laboratorioRepository);
 	}
 	
 	@Test
@@ -31,22 +30,6 @@ public class SalvaLaboratorioServiceImplTest {
 		
 		assertThat(laboratorioSalvo).isNotNull();
 		assertThat(laboratorioSalvo.toString()).isEqualTo(laboratorio.toString());
-	}
-	
-	@Test
-	public void deve_editar_laboratorio() {
-		final Laboratorio laboratorio = LaboratorioMock.obterLaboratorio();
-		doNothing().when(laboratorioRepository).save(laboratorio);
-		final Laboratorio laboratorioSalvo = service.salvar(laboratorio);
-		
-		assertThat(laboratorioSalvo).isNotNull();
-		assertThat(laboratorioSalvo.toString()).isEqualTo(laboratorio.toString());
-		
-		laboratorio.setStatus(Status.INATIVO);
-		final Laboratorio laboratorioAlterado = service.salvar(laboratorio);
-		
-		assertThat(laboratorioAlterado).isNotNull();
-		assertThat(laboratorioAlterado.toString()).isNotEqualTo(laboratorioSalvo.toString());
 	}
 
 }
