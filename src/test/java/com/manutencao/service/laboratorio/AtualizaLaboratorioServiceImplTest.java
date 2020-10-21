@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.manutencao.exceptionhandler.NotFoundExcetion;
 import com.manutencao.infrastructure.LaboratorioRepository;
 import com.manutencao.mock.LaboratorioMock;
 import com.manutencao.model.laboratorio.Laboratorio;
@@ -43,9 +44,9 @@ public class AtualizaLaboratorioServiceImplTest {
 	@Test
 	public void deve_lancar_exception_quando_laboratorio_nao_existe() {
 		assertThatThrownBy(() -> {
-			service.atualizar(LaboratorioMock.obterLaboratorioAtivo());
+			service.atualizar(LaboratorioMock.obterLaboratorioInativo());
 		})
-		.isExactlyInstanceOf(IllegalArgumentException.class);
+		.isExactlyInstanceOf(NotFoundExcetion.class);
 	}
 	
 }

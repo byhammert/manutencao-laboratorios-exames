@@ -10,6 +10,7 @@ import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.manutencao.exceptionhandler.NotFoundExcetion;
 import com.manutencao.infrastructure.ExameRepository;
 import com.manutencao.mock.ExameMock;
 import com.manutencao.model.exame.Exame;
@@ -43,9 +44,10 @@ public class AtualizaExameServiceImplTest {
 	@Test
 	public void deve_lancar_exception_quando_exame_nao_existe() {
 		assertThatThrownBy(() -> {
-			service.atualizar(ExameMock.obterExameAtivo());
+			Exame exame = ExameMock.obterExameInativo();
+			service.atualizar(exame);
 		})
-		.isExactlyInstanceOf(IllegalArgumentException.class);
+		.isExactlyInstanceOf(NotFoundExcetion.class);
 	}
 	
 }
