@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 
 import com.manutencao.model.Status;
-import com.manutencao.model.exame.Exame;
 import com.manutencao.util.IDUtil;
 
 public class Laboratorio {
@@ -14,11 +13,11 @@ public class Laboratorio {
 	private String nome;
 	private String endereco;
 	private Status status;
-	private List<Exame> exames;
+	private List<String> exames;
 	
 	private Laboratorio() {}
 	
-	public Laboratorio(String nome, String endereco, Status status, List<Exame> exames) {
+	public Laboratorio(String nome, String endereco, Status status, List<String> exames) {
 		super();
 		this.id = IDUtil.gerarID();
 		this.nome = nome;
@@ -59,11 +58,11 @@ public class Laboratorio {
 		this.status = status;
 	}
 	
-	public List<Exame> getExames() {
+	public List<String> getExames() {
 		return exames;
 	}
 
-	public void setExames(List<Exame> exames) {
+	public void setExames(List<String> exames) {
 		this.exames = exames;
 	}
 	

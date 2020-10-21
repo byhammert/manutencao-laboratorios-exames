@@ -6,7 +6,7 @@ import com.manutencao.model.laboratorio.LaboratorioBuilder;
 
 public class LaboratorioMock {
 
-	public static Laboratorio obterLaboratorio() {
+	public static Laboratorio obterLaboratorioAtivo() {
 		final String nome = "Laboratório Teste";
 		final String endereco = "Endereço Teste";
 		final Status status = Status.ATIVO;
@@ -16,6 +16,12 @@ public class LaboratorioMock {
 															.comEndereco(endereco)
 															.comStatus(status)
 															.build();
+		return laboratorio;
+	}
+	
+	public static Laboratorio obterLaboratorioInativo() {
+		final Laboratorio laboratorio = obterLaboratorioAtivo();
+		laboratorio.setStatus(Status.INATIVO);
 		return laboratorio;
 	}
 	

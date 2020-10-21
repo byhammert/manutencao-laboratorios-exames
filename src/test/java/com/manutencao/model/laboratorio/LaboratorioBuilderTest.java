@@ -4,10 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
-import com.manutencao.mock.ExameMock;
 import com.manutencao.model.Status;
-import com.manutencao.model.exame.Exame;
-import com.manutencao.model.exame.TipoExame;
 
 public class LaboratorioBuilderTest {
 	
@@ -21,7 +18,7 @@ public class LaboratorioBuilderTest {
 															.comNome(nome)
 															.comEndereco(endereco)
 															.comStatus(status)
-															.addExame(ExameMock.obterExame())
+															.addExame("teste")
 															.build();
 		
 		assertThat(laboratorio).isNotNull();
@@ -30,11 +27,8 @@ public class LaboratorioBuilderTest {
 		assertThat(laboratorio.getStatus()).isEqualTo(status);
 		assertThat(laboratorio.getExames()).isNotNull().isNotEmpty();
 		
-		final Exame exame = laboratorio.getExames().get(0);
-		assertThat(exame.getNome()).isEqualTo("Nome Exame");
-		assertThat(exame.getStatus()).isEqualTo(Status.ATIVO);
-		assertThat(exame.getTipoExame()).isEqualTo(TipoExame.IMAGEM);
-		assertThat(exame.getLaboratorios()).isNotNull().isEmpty();
+		final String exame = laboratorio.getExames().get(0);
+		assertThat(exame).isEqualTo("teste");
 		
 	}
 	

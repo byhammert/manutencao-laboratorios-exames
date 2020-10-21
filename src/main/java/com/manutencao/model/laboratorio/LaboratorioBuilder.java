@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.manutencao.model.Status;
-import com.manutencao.model.exame.Exame;
 
 public class LaboratorioBuilder {
 	
 	private String nome;
 	private String endereco;
 	private Status status;
-	private List<Exame> exames = new ArrayList<>();
+	private List<String> exames = new ArrayList<>();
 	
 	private LaboratorioBuilder() {}
 	
@@ -34,13 +33,15 @@ public class LaboratorioBuilder {
 		return this;
 	}
 	
-	public LaboratorioBuilder addExame(Exame exame) {
-		this.exames.add(exame);
+	public LaboratorioBuilder addExame(String exame) {
+		if(null != exame)
+			this.exames.add(exame);
 		return this;
 	}
 	
-	public LaboratorioBuilder addAllExame(List<Exame> exames) {
-		this.exames.addAll(exames);
+	public LaboratorioBuilder addAllExame(List<String> exames) {
+		if(null != exames && !exames.isEmpty())
+			this.exames.addAll(exames);
 		return this;
 	}
 	

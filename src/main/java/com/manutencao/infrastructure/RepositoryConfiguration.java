@@ -6,14 +6,19 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RepositoryConfiguration {
 	
+	private LaboratorioInMemRepository laboratorioInMemRepository = new LaboratorioInMemRepository();
+	private ExameInMemRepository exameInMemRepository = new ExameInMemRepository();
+	
 	@Bean
 	public LaboratorioRepository createLaboratorioRepository() {
-		return new LaboratorioInMemRepository();
+		laboratorioInMemRepository.addObserver(exameInMemRepository);
+		return laboratorioInMemRepository;
 	}
 	
 	@Bean
 	public ExameRepository createExameRepository() {
-		return new ExameInMemRepository();
+		exameInMemRepository.addObserver(laboratorioInMemRepository);
+		return exameInMemRepository;
 	}
 
 }

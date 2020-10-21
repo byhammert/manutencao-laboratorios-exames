@@ -32,8 +32,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/exame")
-@Api(tags = {"exame"})
+@RequestMapping("api/exame")
+@Api(tags = {"api/exame"})
 public class ExameController {
 	
 	private ConsultaExameService consultaExameService;

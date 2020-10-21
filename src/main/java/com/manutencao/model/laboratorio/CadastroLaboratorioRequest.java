@@ -2,21 +2,16 @@ package com.manutencao.model.laboratorio;
 
 import java.util.List;
 
-import com.manutencao.model.Status;
-import com.manutencao.model.exame.Exame;
-
 public class CadastroLaboratorioRequest {
 	
 	private String nome;
 	private String endereco;
-	private Status status;
-	private List<Exame> exames;
+	private List<String> exames;
 	
-	public CadastroLaboratorioRequest(String nome, String endereco, Status status, List<Exame> exames) {
+	public CadastroLaboratorioRequest(String nome, String endereco,List<String> exames) {
 		super();
 		this.nome = nome;
 		this.endereco = endereco;
-		this.status = status;
 		this.exames = exames;
 	}
 
@@ -36,26 +31,17 @@ public class CadastroLaboratorioRequest {
 		this.endereco = endereco;
 	}
 
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
-	}
-
-	public List<Exame> getExames() {
+	public List<String> getExames() {
 		return exames;
 	}
 
-	public void setExames(List<Exame> exames) {
+	public void setExames(List<String> exames) {
 		this.exames = exames;
 	}
 
 	@Override
 	public String toString() {
-		return "CadastroLaboratorioRequest [nome=" + nome + ", endereco=" + endereco + ", status=" + status
-				+ ", exames=" + exames + "]";
+		return "CadastroLaboratorioRequest [nome=" + nome + ", endereco=" + endereco + ", exames=" + exames + "]";
 	}
 	
 }

@@ -8,25 +8,33 @@ import org.springframework.stereotype.Service;
 import com.manutencao.infrastructure.ExameRepository;
 import com.manutencao.model.Status;
 import com.manutencao.model.exame.Exame;
+import com.manutencao.service.laboratorio.ValidaLaboratorioService;
 
 @Service
 public class ConsultaExameServiceImpl implements ConsultaExameService {
 
 	private ExameRepository exameRepository;
+	private ValidaLaboratorioService validaLaboratorioService;
 	
 	@Autowired
-	public ConsultaExameServiceImpl(ExameRepository exameRepository) {
+	public ConsultaExameServiceImpl(ExameRepository exameRepository,
+			ValidaLaboratorioService validaLaboratorioService) {
 		this.exameRepository = exameRepository;
+		this.validaLaboratorioService = validaLaboratorioService;
 	}
 	
 	@Override
 	public Exame obter(String id) {
-		return exameRepository.getBy(id);
+		Exame exame = exameRepository.getBy(id);
+		exame.setLaboratorios(validaLaboratorioService.obterLaboratoriosValidos(exame.getLaboratorios()));
+		return exame;
 	}
 
 	@Override
 	public List<Exame> obterExamesAtivos() {
-		return exameRepository.listByStatus(Status.ATIVO);
+		List<Exame> exames = exameRepository.listByStatus(Status.ATIVO);
+		exames.forEach(exame -> exame.setLaboratorios(validaLaboratorioService.obterLaboratoriosValidos(exame.getLaboratorios())));
+		return exames;
 	}
 	
 }

@@ -12,5 +12,6 @@ public interface ExameRepository {
 	List<Exame> list();
 	List<Exame> listByStatus(Status status);
 	void delete(String id);
+	List<Exame> obterExamesValidos(List<Exame> exames);
 
 }

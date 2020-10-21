@@ -22,7 +22,7 @@ public class LaboratorioInMemRepositoryTest {
 	
 	@Test
 	public void deve_cadastrar_e_obter_laboratorio() {
-		final Laboratorio laboratorio = LaboratorioMock.obterLaboratorio();
+		final Laboratorio laboratorio = LaboratorioMock.obterLaboratorioAtivo();
 		repository.save(laboratorio);
 		
 		final Laboratorio laboratorioSalvo = repository.getBy(laboratorio.getId());
@@ -33,7 +33,7 @@ public class LaboratorioInMemRepositoryTest {
 	
 	@Test
 	public void deve_alterar_e_obter_lista_de_laboratorios() {
-		final Laboratorio laboratorio = LaboratorioMock.obterLaboratorio();
+		final Laboratorio laboratorio = LaboratorioMock.obterLaboratorioAtivo();
 		repository.save(laboratorio);
 		
 		final Laboratorio laboratorioSalvo = repository.getBy(laboratorio.getId());
@@ -58,10 +58,10 @@ public class LaboratorioInMemRepositoryTest {
 	
 	@Test
 	public void deve_listar_laboratorios_ativos() {
-		final Laboratorio laboratorioAtivo = LaboratorioMock.obterLaboratorio();
+		final Laboratorio laboratorioAtivo = LaboratorioMock.obterLaboratorioAtivo();
 		repository.save(laboratorioAtivo);
 		
-		final Laboratorio laboratorioInativo = LaboratorioMock.obterLaboratorio();
+		final Laboratorio laboratorioInativo = LaboratorioMock.obterLaboratorioAtivo();
 		laboratorioInativo.setStatus(Status.INATIVO);
 		repository.save(laboratorioInativo);
 		
@@ -74,7 +74,7 @@ public class LaboratorioInMemRepositoryTest {
 	
 	@Test
 	public void deve_deletar_laboratorio() {
-		final Laboratorio laboratorio = LaboratorioMock.obterLaboratorio();
+		final Laboratorio laboratorio = LaboratorioMock.obterLaboratorioAtivo();
 		repository.save(laboratorio);
 		
 		final Laboratorio laboratorioSalvo = repository.getBy(laboratorio.getId());

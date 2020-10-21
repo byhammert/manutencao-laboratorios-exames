@@ -7,9 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.manutencao.mock.LaboratorioMock;
 import com.manutencao.model.Status;
-import com.manutencao.model.laboratorio.Laboratorio;
 
 public class ExameTest {
 	
@@ -40,7 +38,7 @@ public class ExameTest {
 		final String nome = "Exame Teste";
 		final TipoExame tipoExame = TipoExame.ANALISE_CLINICA;
 		final Status status = Status.ATIVO;
-		final List<Laboratorio> laboratorios = obterLaboratorios();
+		final List<String> laboratorios = obterLaboratorios();
 		
 		final Exame exame = new Exame(nome, tipoExame, status, laboratorios);
 		final String valorEsperado = "Exame [id=" + exame.getId() + ", nome=" + nome + ", tipoExame=" + tipoExame + ", status=" + status + ", laboratorios="
@@ -54,7 +52,7 @@ public class ExameTest {
 		final TipoExame tipoExame = TipoExame.ANALISE_CLINICA;
 		final Status status = Status.ATIVO;
 		
-		final List<Laboratorio> laboratorios = obterLaboratorios();
+		final List<String> laboratorios = obterLaboratorios();
 		
 		final Exame exame = new Exame(nome, tipoExame, status, laboratorios);
 		
@@ -63,19 +61,16 @@ public class ExameTest {
 		assertThat(exame.getStatus()).isEqualTo(status);
 		assertThat(exame.getLaboratorios()).isNotNull().isNotEmpty();
 		
-		final Laboratorio laboratorio = exame.getLaboratorios().get(0);
+		final String laboratorio = exame.getLaboratorios().get(0);
 		
-		assertThat(laboratorio.getNome()).isEqualTo("Laboratório Teste");
-		assertThat(laboratorio.getEndereco()).isEqualTo("Endereço Teste");
-		assertThat(laboratorio.getStatus()).isEqualTo(Status.ATIVO);
-		assertThat(laboratorio.getExames()).isNotNull().isEmpty();
+		assertThat(laboratorio).isEqualTo("teste");
 		
 		return exame;
 	}
 	
-	private List<Laboratorio> obterLaboratorios() {
-		final List<Laboratorio> laboratorios = new ArrayList<>();
-		laboratorios.add(LaboratorioMock.obterLaboratorio());
+	private List<String> obterLaboratorios() {
+		final List<String> laboratorios = new ArrayList<>();
+		laboratorios.add("teste");
 		return laboratorios;
 	}
 

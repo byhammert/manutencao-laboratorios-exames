@@ -13,21 +13,24 @@ import org.junit.jupiter.api.Test;
 import com.manutencao.infrastructure.LaboratorioRepository;
 import com.manutencao.mock.LaboratorioMock;
 import com.manutencao.model.laboratorio.Laboratorio;
+import com.manutencao.service.exame.ValidaExameService;
 
 public class AtualizaLaboratorioServiceImplTest {
 	
 	private LaboratorioRepository laboratorioRepository;
 	private AtualizaLaboratorioService service;
+	private ValidaExameService validaExameService;
 	
 	@BeforeEach
 	public void setup() {
 		laboratorioRepository = mock(LaboratorioRepository.class);
-		service = new AtualizaLaboratorioServiceImpl(laboratorioRepository);
+		validaExameService = mock(ValidaExameService.class);
+		service = new AtualizaLaboratorioServiceImpl(laboratorioRepository, validaExameService);
 	}
 	
 	@Test
 	public void deve_editar_laboratorio() {
-		final Laboratorio laboratorio = LaboratorioMock.obterLaboratorio();
+		final Laboratorio laboratorio = LaboratorioMock.obterLaboratorioAtivo();
 		doNothing().when(laboratorioRepository).save(laboratorio);
 		when(laboratorioRepository.getBy(anyString())).thenReturn(laboratorio);
 		
@@ -40,7 +43,7 @@ public class AtualizaLaboratorioServiceImplTest {
 	@Test
 	public void deve_lancar_exception_quando_laboratorio_nao_existe() {
 		assertThatThrownBy(() -> {
-			service.atualizar(LaboratorioMock.obterLaboratorio());
+			service.atualizar(LaboratorioMock.obterLaboratorioAtivo());
 		})
 		.isExactlyInstanceOf(IllegalArgumentException.class);
 	}

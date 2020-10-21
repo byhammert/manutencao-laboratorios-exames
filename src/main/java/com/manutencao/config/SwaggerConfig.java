@@ -27,8 +27,8 @@ public class SwaggerConfig {
 					.build()
 					.apiInfo(apiInfo())
 					.tags(
-						new Tag("laboratorio", "Gerenciamento de Laboratório"),
-						new Tag("exame", "Gerenciamento de Exame")
+						new Tag("api/laboratorio", "Gerenciamento de Laboratório"),
+						new Tag("api/exame", "Gerenciamento de Exame")
 					);
 	}
 	

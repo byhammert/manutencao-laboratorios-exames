@@ -13,21 +13,24 @@ import org.junit.jupiter.api.Test;
 import com.manutencao.infrastructure.ExameRepository;
 import com.manutencao.mock.ExameMock;
 import com.manutencao.model.exame.Exame;
+import com.manutencao.service.laboratorio.ValidaLaboratorioService;
 
 public class AtualizaExameServiceImplTest {
 	
 	private ExameRepository exameRepository;
 	private AtualizaExameService service;
+	private ValidaLaboratorioService validaLaboratorioService;
 	
 	@BeforeEach
 	public void setup() {
 		exameRepository = mock(ExameRepository.class);
-		service = new AtualizaExameServiceImpl(exameRepository);
+		validaLaboratorioService = mock(ValidaLaboratorioService.class);
+		service = new AtualizaExameServiceImpl(exameRepository, validaLaboratorioService);
 	}
 	
 	@Test
 	public void deve_editar_exame() {
-		final Exame exame = ExameMock.obterExame();
+		final Exame exame = ExameMock.obterExameAtivo();
 		doNothing().when(exameRepository).save(exame);
 		when(exameRepository.getBy(anyString())).thenReturn(exame);
 		
@@ -40,7 +43,7 @@ public class AtualizaExameServiceImplTest {
 	@Test
 	public void deve_lancar_exception_quando_exame_nao_existe() {
 		assertThatThrownBy(() -> {
-			service.atualizar(ExameMock.obterExame());
+			service.atualizar(ExameMock.obterExameAtivo());
 		})
 		.isExactlyInstanceOf(IllegalArgumentException.class);
 	}

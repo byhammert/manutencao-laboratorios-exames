@@ -7,10 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import com.manutencao.mock.ExameMock;
 import com.manutencao.model.Status;
-import com.manutencao.model.exame.Exame;
-import com.manutencao.model.exame.TipoExame;
 
 public class LaboratorioTest {
 	
@@ -42,7 +39,7 @@ public class LaboratorioTest {
 		final String nome = "Laboratório Teste";
 		final String endereco = "Endereço Teste";
 		final Status status = Status.ATIVO;
-		final List<Exame> exames = obterExames();
+		final List<String> exames = obterExames();
 		
 		final Laboratorio laboratorio = new Laboratorio(nome, endereco, status, exames);
 		
@@ -56,7 +53,7 @@ public class LaboratorioTest {
 		final String nome = "Laboratório Teste";
 		final String endereco = "Endereço Teste";
 		final Status status = Status.ATIVO;
-		final List<Exame> exames = obterExames();
+		final List<String> exames = obterExames();
 		
 		final Laboratorio laboratorio = new Laboratorio(nome, endereco, status, exames);
 		
@@ -66,19 +63,16 @@ public class LaboratorioTest {
 		assertThat(laboratorio.getStatus()).isEqualTo(status);
 		assertThat(laboratorio.getExames()).isNotNull().isNotEmpty();
 		
-		final Exame exame = laboratorio.getExames().get(0);
+		final String exame = laboratorio.getExames().get(0);
 		
-		assertThat(exame.getNome()).isEqualTo("Nome Exame");
-		assertThat(exame.getStatus()).isEqualTo(Status.ATIVO);
-		assertThat(exame.getTipoExame()).isEqualTo(TipoExame.IMAGEM);
-		assertThat(exame.getLaboratorios()).isNotNull().isEmpty();
+		assertThat(exame).isEqualTo("teste");
 		
 		return laboratorio;
 	}
 	
-	private List<Exame> obterExames() {
-		final List<Exame> exames = new ArrayList<>();
-		exames.add(ExameMock.obterExame());
+	private List<String> obterExames() {
+		final List<String> exames = new ArrayList<>();
+		exames.add("teste");
 		return exames;
 	}
 

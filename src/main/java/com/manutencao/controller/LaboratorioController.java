@@ -32,8 +32,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @RestController
-@RequestMapping("/laboratorio")
-@Api(tags = {"laboratorio"})
+@RequestMapping("api/laboratorio")
+@Api(tags = {"api/laboratorio"})
 public class LaboratorioController {
 	
 	private ConsultaLaboratorioService consultaLaboratorioService;

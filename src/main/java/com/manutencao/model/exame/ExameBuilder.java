@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.manutencao.model.Status;
-import com.manutencao.model.laboratorio.Laboratorio;
 
 public class ExameBuilder {
 	
 	private String nome;
 	private TipoExame tipoExame;
 	private Status status;
-	private List<Laboratorio> laboratorios = new ArrayList<>();
+	private List<String> laboratorios = new ArrayList<>();
 	
 	private ExameBuilder() {}
 	
@@ -34,13 +33,15 @@ public class ExameBuilder {
 		return this;
 	}
 	
-	public ExameBuilder addLaboratorio(Laboratorio laboratorio) {
-		this.laboratorios.add(laboratorio);
+	public ExameBuilder addLaboratorio(String laboratorio) {
+		if(null != laboratorio)
+			this.laboratorios.add(laboratorio);
 		return this;
 	}
 	
-	public ExameBuilder addAllLaboratorio(List<Laboratorio> laboratorios) {
-		this.laboratorios.addAll(laboratorios);
+	public ExameBuilder addAllLaboratorio(List<String> laboratorios) {
+		if(null != laboratorios && !laboratorios.isEmpty())
+			this.laboratorios.addAll(laboratorios);
 		return this;
 	}
 	

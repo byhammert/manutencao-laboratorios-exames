@@ -27,7 +27,7 @@ public class DeletaExameServiceImpl implements DeletaExameService {
 		Exame exame = exameRepository.getBy(id);
 		boolean exameInativo = exame.getStatus().equals(Status.INATIVO);
 		if (null == exame || exameInativo) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Só é possível remover Exames ativos.");
 		}
 	}
 

@@ -15,20 +15,23 @@ import com.manutencao.infrastructure.LaboratorioRepository;
 import com.manutencao.mock.LaboratorioMock;
 import com.manutencao.model.Status;
 import com.manutencao.model.laboratorio.Laboratorio;
+import com.manutencao.service.exame.ValidaExameService;
 
 public class ConsultaLaboratorioServiceImplTest {
 	private LaboratorioRepository laboratorioRepository;
 	private ConsultaLaboratorioService service;
+	private ValidaExameService validaExameService;
 	
 	@BeforeEach
 	public void setup() {
 		laboratorioRepository = mock(LaboratorioRepository.class);
-		service = new ConsultaLaboratorioServiceImpl(laboratorioRepository);
+		validaExameService = mock(ValidaExameService.class);
+		service = new ConsultaLaboratorioServiceImpl(laboratorioRepository, validaExameService);
 	}
 	
 	@Test
 	public void deve_obter_laboratorio() {
-		Laboratorio laboratorio = LaboratorioMock.obterLaboratorio();
+		Laboratorio laboratorio = LaboratorioMock.obterLaboratorioAtivo();
 		
 		when(laboratorioRepository.getBy(anyString())).thenReturn(laboratorio);
 		
@@ -40,7 +43,7 @@ public class ConsultaLaboratorioServiceImplTest {
 	
 	@Test
 	public void deve_obter_laboratorios_ativos() {
-		Laboratorio laboratorio = LaboratorioMock.obterLaboratorio();
+		Laboratorio laboratorio = LaboratorioMock.obterLaboratorioAtivo();
 		List<Laboratorio> laboratorios = new ArrayList<>();
 		laboratorios.add(laboratorio);
 		
@@ -50,6 +53,4 @@ public class ConsultaLaboratorioServiceImplTest {
 		
 		assertThat(retorno).isNotNull().isNotEmpty().hasSize(1);
 	}
-	
-	
 }
