@@ -7,6 +7,7 @@ import com.manutencao.model.Status;
 
 public class LaboratorioBuilder {
 	
+	private String id;
 	private String nome;
 	private String endereco;
 	private Status status;
@@ -16,6 +17,11 @@ public class LaboratorioBuilder {
 	
 	public static LaboratorioBuilder builder() {
 		return new LaboratorioBuilder();
+	}
+	
+	public LaboratorioBuilder comId(String id) {
+		this.id = id;
+		return this;
 	}
 	
 	public LaboratorioBuilder comNome(String nome) {
@@ -46,6 +52,6 @@ public class LaboratorioBuilder {
 	}
 	
 	public Laboratorio build() {
-		return new Laboratorio(nome, endereco, status, exames);
+		return new Laboratorio(id, nome, endereco, status, exames);
 	}
 }

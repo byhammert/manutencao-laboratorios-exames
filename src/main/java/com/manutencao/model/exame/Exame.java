@@ -3,6 +3,7 @@ package com.manutencao.model.exame;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.util.StringUtils;
 
 import com.manutencao.model.Status;
 import com.manutencao.util.IDUtil;
@@ -17,9 +18,9 @@ public class Exame {
 	
 	private Exame() {}
 	
-	public Exame(String nome, TipoExame tipoExame, Status status, List<String> laboratorios) {
+	public Exame(String id, String nome, TipoExame tipoExame, Status status, List<String> laboratorios) {
 		super();
-		this.id = IDUtil.gerarID();
+		this.id = StringUtils.isEmpty(id) ? IDUtil.gerarID() : id;
 		this.nome = nome;
 		this.tipoExame = tipoExame;
 		this.status = status;

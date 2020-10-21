@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.manutencao.exceptionhandler.NotFoundExcetion;
 import com.manutencao.infrastructure.LaboratorioRepository;
 import com.manutencao.model.laboratorio.Laboratorio;
 import com.manutencao.service.exame.ValidaExameService;
@@ -37,7 +38,7 @@ public class AtualizaLaboratorioServiceImpl implements AtualizaLaboratorioServic
 	private void verificarLaboratorioExistente(String id) {
 		Laboratorio laboratorio = laboratorioRepository.getBy(id);
 		if (null == laboratorio) {
-			throw new IllegalArgumentException();
+			throw new NotFoundExcetion();
 		}
 	}
 

@@ -3,6 +3,7 @@ package com.manutencao.model.laboratorio;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.util.StringUtils;
 
 import com.manutencao.model.Status;
 import com.manutencao.util.IDUtil;
@@ -17,9 +18,9 @@ public class Laboratorio {
 	
 	private Laboratorio() {}
 	
-	public Laboratorio(String nome, String endereco, Status status, List<String> exames) {
+	public Laboratorio(String id, String nome, String endereco, Status status, List<String> exames) {
 		super();
-		this.id = IDUtil.gerarID();
+		this.id = StringUtils.isEmpty(id) ? IDUtil.gerarID() : id;
 		this.nome = nome;
 		this.endereco = endereco;
 		this.status = status;

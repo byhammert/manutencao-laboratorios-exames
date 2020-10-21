@@ -7,6 +7,7 @@ import com.manutencao.model.Status;
 
 public class ExameBuilder {
 	
+	private String id;
 	private String nome;
 	private TipoExame tipoExame;
 	private Status status;
@@ -16,6 +17,11 @@ public class ExameBuilder {
 	
 	public static ExameBuilder builder() {
 		return new ExameBuilder();
+	}
+	
+	public ExameBuilder comId(String id) {
+		this.id = id;
+		return this;
 	}
 	
 	public ExameBuilder comNome(String nome) {
@@ -46,7 +52,7 @@ public class ExameBuilder {
 	}
 	
 	public Exame build() {
-		return new Exame(nome, tipoExame, status, laboratorios);
+		return new Exame(id, nome, tipoExame, status, laboratorios);
 	}
 
 }

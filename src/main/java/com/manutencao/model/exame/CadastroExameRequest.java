@@ -2,15 +2,17 @@ package com.manutencao.model.exame;
 
 import java.util.List;
 
-import com.manutencao.model.Status;
+import org.springframework.util.StringUtils;
+
+import com.google.common.base.Preconditions;
 
 public class CadastroExameRequest {
 	
-	private String nome;
-	private TipoExame tipoExame;
-	private List<String> laboratorios;
+	private final String nome;
+	private final TipoExame tipoExame;
+	private final List<String> laboratorios;
 	
-	public CadastroExameRequest(String nome, TipoExame tipoExame, Status status, List<String> laboratorios) {
+	public CadastroExameRequest(String nome, TipoExame tipoExame, List<String> laboratorios) {
 		super();
 		this.nome = nome;
 		this.tipoExame = tipoExame;
@@ -21,26 +23,19 @@ public class CadastroExameRequest {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public TipoExame getTipoExame() {
 		return tipoExame;
-	}
-
-	public void setTipoExame(TipoExame tipoExame) {
-		this.tipoExame = tipoExame;
 	}
 
 	public List<String> getLaboratorios() {
 		return laboratorios;
 	}
 
-	public void setLaboratorios(List<String> laboratorios) {
-		this.laboratorios = laboratorios;
+	public void validarCampos() {
+		Preconditions.checkArgument(!StringUtils.isEmpty(nome), "Nome deve ser informador.");
+		Preconditions.checkArgument(tipoExame != null, "TipoExame deve ser informador.");
 	}
-
+	
 	@Override
 	public String toString() {
 		return "CadastroExameRequest [nome=" + nome + ", tipoExame=" + tipoExame + ", laboratorios=" + laboratorios + "]";

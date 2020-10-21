@@ -12,5 +12,15 @@ public class ExameTranslator {
 							.addAllLaboratorio(cadastroExameRequest.getLaboratorios())
 							.build();
 	}
+	
+	public static Exame translate(AlteraExameRequest alteraExameRequest) {
+		return ExameBuilder.builder()
+				.comId(alteraExameRequest.getId())
+				.comNome(alteraExameRequest.getNome())
+				.comStatus(alteraExameRequest.getStatus())
+				.comTipoExame(alteraExameRequest.getTipoExame())
+				.addAllLaboratorio(alteraExameRequest.getLaboratorios())
+				.build();
+	}
 
 }

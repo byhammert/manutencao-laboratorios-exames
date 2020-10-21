@@ -104,7 +104,6 @@ public class ExameInMemRepository extends Observable implements ExameRepository,
 	}
 	
 	public void mudarEstado(Exame exame) {
-		System.out.println("Notificando Laboratorios");
 		setChanged();
 		notifyObservers(exame);
 	}

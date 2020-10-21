@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,7 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.manutencao.event.RecursoCriadoEvent;
+import com.manutencao.exceptionhandler.NotFoundExcetion;
+import com.manutencao.model.exame.AlteraExameRequest;
 import com.manutencao.model.exame.CadastroExameRequest;
 import com.manutencao.model.exame.Exame;
 import com.manutencao.model.exame.ExameTranslator;
@@ -40,19 +40,16 @@ public class ExameController {
 	private CadastroExameService salvaExameService;
 	private AtualizaExameService atualizaExameService;
 	private DeletaExameService deletaExameService;
-	private ApplicationEventPublisher publisher;
 	
 	@Autowired
 	public ExameController(ConsultaExameService consultaExameService, 
 							CadastroExameService salvaExameService,
 							AtualizaExameService atualizaExameService,
-							DeletaExameService deletaExameService,
-							ApplicationEventPublisher publisher) {
+							DeletaExameService deletaExameService) {
 		this.consultaExameService = consultaExameService;
 		this.salvaExameService = salvaExameService;
 		this.atualizaExameService = atualizaExameService;
 		this.deletaExameService = deletaExameService;
-		this.publisher = publisher;
 	}
 	
 	@GetMapping()
@@ -64,19 +61,21 @@ public class ExameController {
 	@PostMapping
 	@ApiOperation(value = "Cadastra um novo exame")
 	public ResponseEntity<Exame> cadastrar(@RequestBody CadastroExameRequest request, HttpServletResponse response) {
+		request.validarCampos();
 		Exame exame = ExameTranslator.translate(request);
 		Exame exameSalvo = salvaExameService.salvar(exame);
-		publisher.publishEvent(new RecursoCriadoEvent(this, response, exameSalvo.getId()));
 		return ResponseEntity.status(HttpStatus.CREATED).body(exameSalvo);
 	}
 	
 	@PutMapping()
 	@ApiOperation(value = "Atualiza um exame existente")
-	public ResponseEntity<Exame> atualizar(@RequestBody Exame exame) {
+	public ResponseEntity<Exame> atualizar(@RequestBody AlteraExameRequest request) {
+		request.validarCampos();
 		try {
+			Exame exame = ExameTranslator.translate(request);
 			Exame exameSalvo = atualizaExameService.atualizar(exame);
 			return ResponseEntity.ok(exameSalvo);
-		} catch (IllegalArgumentException e) {
+		} catch (NotFoundExcetion e) {
 			return ResponseEntity.notFound().build();
 		}
 	}

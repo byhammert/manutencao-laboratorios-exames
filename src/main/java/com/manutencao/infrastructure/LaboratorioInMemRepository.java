@@ -92,7 +92,6 @@ public class LaboratorioInMemRepository extends Observable implements Laboratori
 	}
 	
 	public void mudarEstado(Laboratorio laboratorio) {
-		System.out.println("Notificando Exames");
 		setChanged();
 		notifyObservers(laboratorio);
 	}

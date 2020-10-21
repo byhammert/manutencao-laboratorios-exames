@@ -2,13 +2,17 @@ package com.manutencao.model.laboratorio;
 
 import java.util.List;
 
+import org.springframework.util.StringUtils;
+
+import com.google.common.base.Preconditions;
+
 public class CadastroLaboratorioRequest {
 	
-	private String nome;
-	private String endereco;
-	private List<String> exames;
+	private final String nome;
+	private final String endereco;
+	private final List<String> exames;
 	
-	public CadastroLaboratorioRequest(String nome, String endereco,List<String> exames) {
+	public CadastroLaboratorioRequest(String nome, String endereco, List<String> exames) {
 		super();
 		this.nome = nome;
 		this.endereco = endereco;
@@ -19,24 +23,16 @@ public class CadastroLaboratorioRequest {
 		return nome;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-
 	public String getEndereco() {
 		return endereco;
-	}
-
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
 	}
 
 	public List<String> getExames() {
 		return exames;
 	}
-
-	public void setExames(List<String> exames) {
-		this.exames = exames;
+	
+	public void validarCampos() {
+		Preconditions.checkArgument(!StringUtils.isEmpty(nome), "Nome deve ser informador.");
 	}
 
 	@Override

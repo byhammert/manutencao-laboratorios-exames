@@ -41,7 +41,7 @@ public class LaboratorioTest {
 		final Status status = Status.ATIVO;
 		final List<String> exames = obterExames();
 		
-		final Laboratorio laboratorio = new Laboratorio(nome, endereco, status, exames);
+		final Laboratorio laboratorio = new Laboratorio(null, nome, endereco, status, exames);
 		
 		final String valorEsperado = "Laboratorio [id=" + laboratorio.getId() + ", nome=" + nome + ", endereco=" + endereco + ", status=" + status
 				+ ", exames=" + exames + "]";
@@ -55,7 +55,7 @@ public class LaboratorioTest {
 		final Status status = Status.ATIVO;
 		final List<String> exames = obterExames();
 		
-		final Laboratorio laboratorio = new Laboratorio(nome, endereco, status, exames);
+		final Laboratorio laboratorio = new Laboratorio(null, nome, endereco, status, exames);
 		
 		assertThat(laboratorio.getId()).isNotNull();
 		assertThat(laboratorio.getNome()).isEqualTo(nome);
