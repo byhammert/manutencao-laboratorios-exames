@@ -4,9 +4,8 @@ import java.util.List;
 
 import com.manutencao.model.laboratorio.Laboratorio;
 
-public interface ConsultaLaboratorioService {
+public interface ConsultaLaboratorioUsecase {
 	
-	Laboratorio obter(String id);
-	List<Laboratorio> obterLaboratoriosAtivos();
+	List<Laboratorio> executar();
 
 }

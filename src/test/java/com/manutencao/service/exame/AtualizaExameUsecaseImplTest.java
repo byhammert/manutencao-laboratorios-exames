@@ -14,19 +14,19 @@ import com.manutencao.exceptionhandler.NotFoundExcetion;
 import com.manutencao.infrastructure.ExameRepository;
 import com.manutencao.mock.ExameMock;
 import com.manutencao.model.exame.Exame;
-import com.manutencao.service.laboratorio.ValidaLaboratorioService;
+import com.manutencao.service.laboratorio.ValidaLaboratorioUsecase;
 
-public class AtualizaExameServiceImplTest {
+public class AtualizaExameUsecaseImplTest {
 	
 	private ExameRepository exameRepository;
-	private AtualizaExameService service;
-	private ValidaLaboratorioService validaLaboratorioService;
+	private AtualizaExameUsecase service;
+	private ValidaLaboratorioUsecase validaLaboratorioService;
 	
 	@BeforeEach
 	public void setup() {
 		exameRepository = mock(ExameRepository.class);
-		validaLaboratorioService = mock(ValidaLaboratorioService.class);
-		service = new AtualizaExameServiceImpl(exameRepository, validaLaboratorioService);
+		validaLaboratorioService = mock(ValidaLaboratorioUsecase.class);
+		service = new AtualizaExameUsecaseImpl(exameRepository, validaLaboratorioService);
 	}
 	
 	@Test
@@ -35,7 +35,7 @@ public class AtualizaExameServiceImplTest {
 		doNothing().when(exameRepository).save(exame);
 		when(exameRepository.getBy(anyString())).thenReturn(exame);
 		
-		final Exame exameAlterado = service.atualizar(exame);
+		final Exame exameAlterado = service.executar(exame);
 		
 		assertThat(exameAlterado).isNotNull();
 		assertThat(exameAlterado.toString()).isEqualTo(exame.toString());
@@ -45,7 +45,7 @@ public class AtualizaExameServiceImplTest {
 	public void deve_lancar_exception_quando_exame_nao_existe() {
 		assertThatThrownBy(() -> {
 			Exame exame = ExameMock.obterExameInativo();
-			service.atualizar(exame);
+			service.executar(exame);
 		})
 		.isExactlyInstanceOf(NotFoundExcetion.class);
 	}

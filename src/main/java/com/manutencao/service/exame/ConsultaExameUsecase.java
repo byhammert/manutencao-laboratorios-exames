@@ -4,9 +4,8 @@ import java.util.List;
 
 import com.manutencao.model.exame.Exame;
 
-public interface ConsultaExameService {
+public interface ConsultaExameUsecase {
 	
-	Exame obter(String id);
-	List<Exame> obterExamesAtivos();
+	List<Exame> executar();
 
 }

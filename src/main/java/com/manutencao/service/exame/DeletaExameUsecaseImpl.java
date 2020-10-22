@@ -10,17 +10,17 @@ import com.manutencao.model.Status;
 import com.manutencao.model.exame.Exame;
 
 @Service
-public class DeletaExameServiceImpl implements DeletaExameService {
+public class DeletaExameUsecaseImpl implements DeletaExameUsecase {
 	
 	private ExameRepository exameRepository;
 	
 	@Autowired
-	public DeletaExameServiceImpl(ExameRepository exameRepository) {
+	public DeletaExameUsecaseImpl(ExameRepository exameRepository) {
 		this.exameRepository = exameRepository;
 	}
 
 	@Override
-	public void remover(String id) {
+	public void executar(String id) {
 		Preconditions.checkArgument(!StringUtils.isEmpty(id), "Id deve ser informador.");
 		verificarStatusExame(id);
 		exameRepository.delete(id);

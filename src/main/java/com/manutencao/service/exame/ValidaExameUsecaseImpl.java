@@ -10,15 +10,15 @@ import com.manutencao.model.Status;
 import com.manutencao.model.exame.Exame;
 
 @Service
-public class ValidaExameServiceImpl implements ValidaExameService {
+public class ValidaExameUsecaseImpl implements ValidaExameUsecase {
 	
 	private ExameRepository exameRepository;
 	
-	public ValidaExameServiceImpl(ExameRepository exameRepository) {
+	public ValidaExameUsecaseImpl(ExameRepository exameRepository) {
 		this.exameRepository = exameRepository;
 	}
 	
-	public List<String> obterExamesValidos(List<String> exames) {
+	public List<String> executar(List<String> exames) {
 		List<Exame> examesAtivos = exameRepository.listByStatus(Status.ATIVO);
 		return examesAtivos.stream()
 						   .flatMap(exameAtivo -> exames.stream()

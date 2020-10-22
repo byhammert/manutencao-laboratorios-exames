@@ -14,19 +14,19 @@ import com.manutencao.exceptionhandler.NotFoundExcetion;
 import com.manutencao.infrastructure.LaboratorioRepository;
 import com.manutencao.mock.LaboratorioMock;
 import com.manutencao.model.laboratorio.Laboratorio;
-import com.manutencao.service.exame.ValidaExameService;
+import com.manutencao.service.exame.ValidaExameUsecase;
 
-public class AtualizaLaboratorioServiceImplTest {
+public class AtualizaLaboratorioUsecaseImplTest {
 	
 	private LaboratorioRepository laboratorioRepository;
-	private AtualizaLaboratorioService service;
-	private ValidaExameService validaExameService;
+	private AtualizaLaboratorioUsecase service;
+	private ValidaExameUsecase validaExameService;
 	
 	@BeforeEach
 	public void setup() {
 		laboratorioRepository = mock(LaboratorioRepository.class);
-		validaExameService = mock(ValidaExameService.class);
-		service = new AtualizaLaboratorioServiceImpl(laboratorioRepository, validaExameService);
+		validaExameService = mock(ValidaExameUsecase.class);
+		service = new AtualizaLaboratorioUsecaseImpl(laboratorioRepository, validaExameService);
 	}
 	
 	@Test
@@ -35,7 +35,7 @@ public class AtualizaLaboratorioServiceImplTest {
 		doNothing().when(laboratorioRepository).save(laboratorio);
 		when(laboratorioRepository.getBy(anyString())).thenReturn(laboratorio);
 		
-		final Laboratorio laboratorioAlterado = service.atualizar(laboratorio);
+		final Laboratorio laboratorioAlterado = service.executar(laboratorio);
 		
 		assertThat(laboratorioAlterado).isNotNull();
 		assertThat(laboratorioAlterado.toString()).isEqualTo(laboratorio.toString());
@@ -44,7 +44,7 @@ public class AtualizaLaboratorioServiceImplTest {
 	@Test
 	public void deve_lancar_exception_quando_laboratorio_nao_existe() {
 		assertThatThrownBy(() -> {
-			service.atualizar(LaboratorioMock.obterLaboratorioInativo());
+			service.executar(LaboratorioMock.obterLaboratorioInativo());
 		})
 		.isExactlyInstanceOf(NotFoundExcetion.class);
 	}

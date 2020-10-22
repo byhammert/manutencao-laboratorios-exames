@@ -15,15 +15,15 @@ import com.manutencao.mock.ExameMock;
 import com.manutencao.model.Status;
 import com.manutencao.model.exame.Exame;
 
-public class ValidaExameServiceImplTest {
+public class ValidaExameUsecaseImplTest {
 	
 	private ExameRepository exameRepository;
-	private ValidaExameService exameService;
+	private ValidaExameUsecase exameService;
 	
 	@BeforeEach
 	public void setup() {
 		exameRepository = mock(ExameRepository.class);
-		exameService = new ValidaExameServiceImpl(exameRepository);
+		exameService = new ValidaExameUsecaseImpl(exameRepository);
 	}
 	
 	@Test
@@ -44,7 +44,7 @@ public class ValidaExameServiceImplTest {
 		
 		when(exameRepository.listByStatus(Status.ATIVO)).thenReturn(examesDaBase);
 		
-		List<String> retorno = exameService.obterExamesValidos(examesParam);
+		List<String> retorno = exameService.executar(examesParam);
 		
 		assertThat(retorno).isNotNull().isNotEmpty().hasSize(1);
 		assertThat(retorno.get(0).toString()).isEqualTo(exameValido.getId());

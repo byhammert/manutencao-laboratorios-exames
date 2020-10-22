@@ -10,15 +10,15 @@ import com.manutencao.model.Status;
 import com.manutencao.model.laboratorio.Laboratorio;
 
 @Service
-public class ValidaLaboratorioServiceImpl implements ValidaLaboratorioService {
+public class ValidaLaboratorioUsecaseImpl implements ValidaLaboratorioUsecase {
 	
 	private LaboratorioRepository laboratorioRepository;
 	
-	public ValidaLaboratorioServiceImpl(LaboratorioRepository laboratorioRepository) {
+	public ValidaLaboratorioUsecaseImpl(LaboratorioRepository laboratorioRepository) {
 		this.laboratorioRepository = laboratorioRepository;
 	}
 	
-	public List<String> obterLaboratoriosValidos(List<String> laboratorios) {
+	public List<String> executar(List<String> laboratorios) {
 		List<Laboratorio> laboratoriosAtivos = laboratorioRepository.listByStatus(Status.ATIVO);
 		return laboratoriosAtivos.stream()
 								 .flatMap(laboratorioAtivo -> laboratorios.stream()

@@ -15,15 +15,15 @@ import com.manutencao.mock.LaboratorioMock;
 import com.manutencao.model.Status;
 import com.manutencao.model.laboratorio.Laboratorio;
 
-public class ValidaLaboratorioServiceImplTest {
+public class ValidaLaboratorioUsecaseImplTest {
 	
 	private LaboratorioRepository laboratorioRepository;
-	private ValidaLaboratorioService validaLaboratorioService;
+	private ValidaLaboratorioUsecase validaLaboratorioService;
 	
 	@BeforeEach
 	public void setup() {
 		laboratorioRepository = mock(LaboratorioRepository.class);
-		validaLaboratorioService = new ValidaLaboratorioServiceImpl(laboratorioRepository);
+		validaLaboratorioService = new ValidaLaboratorioUsecaseImpl(laboratorioRepository);
 	}
 	
 	@Test
@@ -44,7 +44,7 @@ public class ValidaLaboratorioServiceImplTest {
 		
 		when(laboratorioRepository.listByStatus(Status.ATIVO)).thenReturn(laboratoriosDaBase);
 		
-		List<String> retorno = validaLaboratorioService.obterLaboratoriosValidos(laboratoriosParam);
+		List<String> retorno = validaLaboratorioService.executar(laboratoriosParam);
 		
 		assertThat(retorno).isNotNull().isNotEmpty().hasSize(1);
 		assertThat(retorno.get(0)).isEqualTo(laboratorioValido.getId());

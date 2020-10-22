@@ -12,15 +12,15 @@ import com.manutencao.infrastructure.LaboratorioRepository;
 import com.manutencao.mock.LaboratorioMock;
 import com.manutencao.model.laboratorio.Laboratorio;
 
-public class DeletaLaboratorioServiceImplTest {
+public class DeletaLaboratorioUsecaseImplTest {
 	
 	private LaboratorioRepository laboratorioRepository;
-	private DeletaLaboratorioService service;
+	private DeletaLaboratorioUsecase service;
 	
 	@BeforeEach
 	public void setup() {	
 		laboratorioRepository = mock(LaboratorioRepository.class);
-		service = new DeletaLaboratorioServiceImpl(laboratorioRepository);
+		service = new DeletaLaboratorioUsecaseImpl(laboratorioRepository);
 	}
 	
 	@Test
@@ -28,7 +28,7 @@ public class DeletaLaboratorioServiceImplTest {
 		Laboratorio laboratorio = LaboratorioMock.obterLaboratorioAtivo();
 		when(laboratorioRepository.getBy(anyString())).thenReturn(laboratorio);
 		doNothing().when(laboratorioRepository).delete(anyString());
-		service.remover("teste");
+		service.executar("teste");
 	}
 
 }

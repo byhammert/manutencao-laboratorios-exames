@@ -2,8 +2,8 @@ package com.manutencao.service.exame;
 
 import com.manutencao.model.exame.Exame;
 
-public interface AtualizaExameService {
+public interface AtualizaExameUsecase {
 
-	Exame atualizar(Exame exame);
+	Exame executar(Exame exame);
 	
 }

@@ -10,26 +10,26 @@ import org.junit.jupiter.api.Test;
 import com.manutencao.infrastructure.LaboratorioRepository;
 import com.manutencao.mock.LaboratorioMock;
 import com.manutencao.model.laboratorio.Laboratorio;
-import com.manutencao.service.exame.ValidaExameService;
+import com.manutencao.service.exame.ValidaExameUsecase;
 
-public class CadastroLaboratorioServiceImplTest {
+public class CadastroLaboratorioUsecaseImplTest {
 	
 	private LaboratorioRepository laboratorioRepository;
-	private CadastroLaboratorioService service;
-	private ValidaExameService validaExameService;
+	private CadastroLaboratorioUsecase service;
+	private ValidaExameUsecase validaExameService;
 	
 	@BeforeEach
 	public void setup() {
 		laboratorioRepository = mock(LaboratorioRepository.class);
-		validaExameService = mock(ValidaExameService.class);
-		service = new CadastroLaboratorioServiceImpl(laboratorioRepository, validaExameService);
+		validaExameService = mock(ValidaExameUsecase.class);
+		service = new CadastroLaboratorioUsecaseImpl(laboratorioRepository, validaExameService);
 	}
 	
 	@Test
 	public void deve_cadastrar_laboratorio() {
 		final Laboratorio laboratorio = LaboratorioMock.obterLaboratorioAtivo();
 		doNothing().when(laboratorioRepository).save(laboratorio);
-		final Laboratorio laboratorioSalvo = service.salvar(laboratorio);
+		final Laboratorio laboratorioSalvo = service.executar(laboratorio);
 		
 		assertThat(laboratorioSalvo).isNotNull();
 		assertThat(laboratorioSalvo.toString()).isEqualTo(laboratorio.toString());

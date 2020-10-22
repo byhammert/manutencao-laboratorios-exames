@@ -2,8 +2,8 @@ package com.manutencao.service.exame;
 
 import com.manutencao.model.exame.Exame;
 
-public interface CadastroExameService {
+public interface CadastroExameUsecase {
 	
-	Exame salvar(Exame laboratorio);
+	Exame executar(Exame laboratorio);
 
 }

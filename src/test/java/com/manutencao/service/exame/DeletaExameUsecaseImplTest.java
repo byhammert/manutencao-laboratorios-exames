@@ -10,15 +10,15 @@ import com.manutencao.infrastructure.ExameRepository;
 import com.manutencao.mock.ExameMock;
 import com.manutencao.model.exame.Exame;
 
-public class DeletaExameServiceImplTest {
+public class DeletaExameUsecaseImplTest {
 	
 	private ExameRepository exameRepository;
-	private DeletaExameService service;
+	private DeletaExameUsecase service;
 	
 	@BeforeEach
 	public void setup() {	
 		exameRepository = mock(ExameRepository.class);
-		service = new DeletaExameServiceImpl(exameRepository);
+		service = new DeletaExameUsecaseImpl(exameRepository);
 	}
 	
 	@Test
@@ -26,7 +26,7 @@ public class DeletaExameServiceImplTest {
 		Exame exame = ExameMock.obterExameAtivo();
 		when(exameRepository.getBy(anyString())).thenReturn(exame);
 		doNothing().when(exameRepository).delete(anyString());
-		service.remover("teste");
+		service.executar("teste");
 	}
 
 }

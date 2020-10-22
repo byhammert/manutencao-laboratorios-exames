@@ -23,10 +23,10 @@ import com.manutencao.model.laboratorio.AlteraLaboratorioRequest;
 import com.manutencao.model.laboratorio.CadastroLaboratorioRequest;
 import com.manutencao.model.laboratorio.Laboratorio;
 import com.manutencao.model.laboratorio.LaboratorioTranslator;
-import com.manutencao.service.laboratorio.AtualizaLaboratorioService;
-import com.manutencao.service.laboratorio.CadastroLaboratorioService;
-import com.manutencao.service.laboratorio.ConsultaLaboratorioService;
-import com.manutencao.service.laboratorio.DeletaLaboratorioService;
+import com.manutencao.service.laboratorio.AtualizaLaboratorioUsecase;
+import com.manutencao.service.laboratorio.CadastroLaboratorioUsecase;
+import com.manutencao.service.laboratorio.ConsultaLaboratorioUsecase;
+import com.manutencao.service.laboratorio.DeletaLaboratorioUsecase;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,16 +36,16 @@ import io.swagger.annotations.ApiOperation;
 @Api(tags = {"api/laboratorio"})
 public class LaboratorioController {
 	
-	private ConsultaLaboratorioService consultaLaboratorioService;
-	private CadastroLaboratorioService salvaLaboratorioService;
-	private AtualizaLaboratorioService atualizaLaboratorioService;
-	private DeletaLaboratorioService deletaLaboratorioService;
+	private ConsultaLaboratorioUsecase consultaLaboratorioService;
+	private CadastroLaboratorioUsecase salvaLaboratorioService;
+	private AtualizaLaboratorioUsecase atualizaLaboratorioService;
+	private DeletaLaboratorioUsecase deletaLaboratorioService;
 	
 	@Autowired
-	public LaboratorioController(ConsultaLaboratorioService consultaLaboratorioService, 
-							CadastroLaboratorioService salvaLaboratorioService,
-							AtualizaLaboratorioService atualizaLaboratorioService,
-							DeletaLaboratorioService deletaLaboratorioService) {
+	public LaboratorioController(ConsultaLaboratorioUsecase consultaLaboratorioService, 
+							CadastroLaboratorioUsecase salvaLaboratorioService,
+							AtualizaLaboratorioUsecase atualizaLaboratorioService,
+							DeletaLaboratorioUsecase deletaLaboratorioService) {
 		this.consultaLaboratorioService = consultaLaboratorioService;
 		this.salvaLaboratorioService = salvaLaboratorioService;
 		this.atualizaLaboratorioService = atualizaLaboratorioService;
@@ -55,7 +55,7 @@ public class LaboratorioController {
 	@GetMapping()
 	@ApiOperation(value = "Retorna a lista de laboratório ativos")
 	public ResponseEntity<List<Laboratorio>> listarLaboratoriosAtivos() {
-		return ResponseEntity.ok(consultaLaboratorioService.obterLaboratoriosAtivos());
+		return ResponseEntity.ok(consultaLaboratorioService.executar());
 	}
 	
 	@PostMapping
@@ -63,7 +63,7 @@ public class LaboratorioController {
 	public ResponseEntity<Laboratorio> cadastrar(@RequestBody CadastroLaboratorioRequest request, HttpServletResponse response) {
 		request.validarCampos();
 		Laboratorio laboratorio = LaboratorioTranslator.translate(request);
-		Laboratorio laboratorioSalvo = salvaLaboratorioService.salvar(laboratorio);
+		Laboratorio laboratorioSalvo = salvaLaboratorioService.executar(laboratorio);
 		return ResponseEntity.status(HttpStatus.CREATED).body(laboratorioSalvo);
 	}
 	
@@ -72,7 +72,7 @@ public class LaboratorioController {
 	public ResponseEntity<Laboratorio> atualizar(@RequestBody AlteraLaboratorioRequest request) {
 		try {
 			Laboratorio laboratorio = LaboratorioTranslator.translate(request);
-			Laboratorio laboratorioSalvo = atualizaLaboratorioService.atualizar(laboratorio);
+			Laboratorio laboratorioSalvo = atualizaLaboratorioService.executar(laboratorio);
 			return ResponseEntity.ok(laboratorioSalvo);
 		} catch (NotFoundExcetion e) {
 			return ResponseEntity.notFound().build();
@@ -83,6 +83,6 @@ public class LaboratorioController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@ApiOperation(value = "Remove um laboratório ativo.")
 	public void remover(@PathVariable String id) {
-		deletaLaboratorioService.remover(id);
+		deletaLaboratorioService.executar(id);
 	}
 }

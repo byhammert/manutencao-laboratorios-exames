@@ -7,25 +7,25 @@ import org.springframework.stereotype.Service;
 
 import com.manutencao.infrastructure.LaboratorioRepository;
 import com.manutencao.model.laboratorio.Laboratorio;
-import com.manutencao.service.exame.ValidaExameService;
+import com.manutencao.service.exame.ValidaExameUsecase;
 
 @Service
-public class CadastroLaboratorioServiceImpl implements CadastroLaboratorioService {
+public class CadastroLaboratorioUsecaseImpl implements CadastroLaboratorioUsecase {
 
 	private LaboratorioRepository laboratorioRepository;
-	private ValidaExameService validaExameService;
+	private ValidaExameUsecase validaExameService;
 	
 	@Autowired
-	public CadastroLaboratorioServiceImpl(LaboratorioRepository laboratorioRepository,
-			ValidaExameService validaExameService) {
+	public CadastroLaboratorioUsecaseImpl(LaboratorioRepository laboratorioRepository,
+			ValidaExameUsecase validaExameService) {
 		this.laboratorioRepository = laboratorioRepository;
 		this.validaExameService = validaExameService;
 	}
 	
 	@Override
-	public Laboratorio salvar(Laboratorio laboratorio) {
+	public Laboratorio executar(Laboratorio laboratorio) {
 		Laboratorio laboratorioSalvo = Laboratorio.clone(laboratorio); 
-		List<String> examesValidos = validaExameService.obterExamesValidos(laboratorioSalvo.getExames());
+		List<String> examesValidos = validaExameService.executar(laboratorioSalvo.getExames());
 		boolean examesInvalido = examesValidos.size() != laboratorioSalvo.getExames().size();
 		if (examesInvalido) 
 			throw new IllegalArgumentException("Um Laboratório só pode ser associado à um exame ativo.");

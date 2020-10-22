@@ -10,17 +10,17 @@ import com.manutencao.model.Status;
 import com.manutencao.model.laboratorio.Laboratorio;
 
 @Service
-public class DeletaLaboratorioServiceImpl implements DeletaLaboratorioService {
+public class DeletaLaboratorioUsecaseImpl implements DeletaLaboratorioUsecase {
 	
 	private LaboratorioRepository laboratorioRepository;
 	
 	@Autowired
-	public DeletaLaboratorioServiceImpl(LaboratorioRepository laboratorioRepository) {
+	public DeletaLaboratorioUsecaseImpl(LaboratorioRepository laboratorioRepository) {
 		this.laboratorioRepository = laboratorioRepository;
 	}
 
 	@Override
-	public void remover(String id) {
+	public void executar(String id) {
 		Preconditions.checkArgument(!StringUtils.isEmpty(id), "Id deve ser informador.");
 		verificarStatusLaborato(id);
 		laboratorioRepository.delete(id);

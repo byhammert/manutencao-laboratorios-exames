@@ -23,10 +23,10 @@ import com.manutencao.model.exame.AlteraExameRequest;
 import com.manutencao.model.exame.CadastroExameRequest;
 import com.manutencao.model.exame.Exame;
 import com.manutencao.model.exame.ExameTranslator;
-import com.manutencao.service.exame.AtualizaExameService;
-import com.manutencao.service.exame.CadastroExameService;
-import com.manutencao.service.exame.ConsultaExameService;
-import com.manutencao.service.exame.DeletaExameService;
+import com.manutencao.service.exame.AtualizaExameUsecase;
+import com.manutencao.service.exame.CadastroExameUsecase;
+import com.manutencao.service.exame.ConsultaExameUsecase;
+import com.manutencao.service.exame.DeletaExameUsecase;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,16 +36,16 @@ import io.swagger.annotations.ApiOperation;
 @Api(tags = {"api/exame"})
 public class ExameController {
 	
-	private ConsultaExameService consultaExameService;
-	private CadastroExameService salvaExameService;
-	private AtualizaExameService atualizaExameService;
-	private DeletaExameService deletaExameService;
+	private ConsultaExameUsecase consultaExameService;
+	private CadastroExameUsecase salvaExameService;
+	private AtualizaExameUsecase atualizaExameService;
+	private DeletaExameUsecase deletaExameService;
 	
 	@Autowired
-	public ExameController(ConsultaExameService consultaExameService, 
-							CadastroExameService salvaExameService,
-							AtualizaExameService atualizaExameService,
-							DeletaExameService deletaExameService) {
+	public ExameController(ConsultaExameUsecase consultaExameService, 
+							CadastroExameUsecase salvaExameService,
+							AtualizaExameUsecase atualizaExameService,
+							DeletaExameUsecase deletaExameService) {
 		this.consultaExameService = consultaExameService;
 		this.salvaExameService = salvaExameService;
 		this.atualizaExameService = atualizaExameService;
@@ -55,7 +55,7 @@ public class ExameController {
 	@GetMapping()
 	@ApiOperation(value = "Retorna a lista de exames ativos")
 	public ResponseEntity<List<Exame>> listarExamesAtivos() {
-		return ResponseEntity.ok(consultaExameService.obterExamesAtivos());
+		return ResponseEntity.ok(consultaExameService.executar());
 	}
 	
 	@PostMapping
@@ -63,7 +63,7 @@ public class ExameController {
 	public ResponseEntity<Exame> cadastrar(@RequestBody CadastroExameRequest request, HttpServletResponse response) {
 		request.validarCampos();
 		Exame exame = ExameTranslator.translate(request);
-		Exame exameSalvo = salvaExameService.salvar(exame);
+		Exame exameSalvo = salvaExameService.executar(exame);
 		return ResponseEntity.status(HttpStatus.CREATED).body(exameSalvo);
 	}
 	
@@ -73,7 +73,7 @@ public class ExameController {
 		request.validarCampos();
 		try {
 			Exame exame = ExameTranslator.translate(request);
-			Exame exameSalvo = atualizaExameService.atualizar(exame);
+			Exame exameSalvo = atualizaExameService.executar(exame);
 			return ResponseEntity.ok(exameSalvo);
 		} catch (NotFoundExcetion e) {
 			return ResponseEntity.notFound().build();
@@ -84,6 +84,6 @@ public class ExameController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@ApiOperation(value = "Remove um exame ativo.")
 	public void remover(@PathVariable String id) {
-		deletaExameService.remover(id);
+		deletaExameService.executar(id);
 	}
 }

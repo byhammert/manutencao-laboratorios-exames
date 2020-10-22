@@ -8,26 +8,26 @@ import org.springframework.stereotype.Service;
 import com.manutencao.exceptionhandler.NotFoundExcetion;
 import com.manutencao.infrastructure.LaboratorioRepository;
 import com.manutencao.model.laboratorio.Laboratorio;
-import com.manutencao.service.exame.ValidaExameService;
+import com.manutencao.service.exame.ValidaExameUsecase;
 
 @Service
-public class AtualizaLaboratorioServiceImpl implements AtualizaLaboratorioService {
+public class AtualizaLaboratorioUsecaseImpl implements AtualizaLaboratorioUsecase {
 	
 	private LaboratorioRepository laboratorioRepository;
-	private ValidaExameService validaExameService;
+	private ValidaExameUsecase validaExameService;
 	
 	@Autowired
-	public AtualizaLaboratorioServiceImpl(LaboratorioRepository laboratorioRepository,
-			ValidaExameService validaExameService) {
+	public AtualizaLaboratorioUsecaseImpl(LaboratorioRepository laboratorioRepository,
+			ValidaExameUsecase validaExameService) {
 		this.laboratorioRepository = laboratorioRepository;
 		this.validaExameService = validaExameService;
 	}
 
 	@Override
-	public Laboratorio atualizar(Laboratorio laboratorio) {
+	public Laboratorio executar(Laboratorio laboratorio) {
 		verificarLaboratorioExistente(laboratorio.getId());
 		Laboratorio laboratorioSalvo = Laboratorio.clone(laboratorio);
-		List<String> examesValidos = validaExameService.obterExamesValidos(laboratorioSalvo.getExames());
+		List<String> examesValidos = validaExameService.executar(laboratorioSalvo.getExames());
 		boolean examesInvalido = examesValidos.size() != laboratorioSalvo.getExames().size();
 		if (examesInvalido) 
 			throw new IllegalArgumentException("Um Laboratório só pode ser associado à um exame ativo.");

@@ -1,7 +1,6 @@
 package com.manutencao.service.laboratorio;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -15,30 +14,18 @@ import com.manutencao.infrastructure.LaboratorioRepository;
 import com.manutencao.mock.LaboratorioMock;
 import com.manutencao.model.Status;
 import com.manutencao.model.laboratorio.Laboratorio;
-import com.manutencao.service.exame.ValidaExameService;
+import com.manutencao.service.exame.ValidaExameUsecase;
 
-public class ConsultaLaboratorioServiceImplTest {
+public class ConsultaLaboratorioUsecaseImplTest {
 	private LaboratorioRepository laboratorioRepository;
-	private ConsultaLaboratorioService service;
-	private ValidaExameService validaExameService;
+	private ConsultaLaboratorioUsecase service;
+	private ValidaExameUsecase validaExameService;
 	
 	@BeforeEach
 	public void setup() {
 		laboratorioRepository = mock(LaboratorioRepository.class);
-		validaExameService = mock(ValidaExameService.class);
-		service = new ConsultaLaboratorioServiceImpl(laboratorioRepository, validaExameService);
-	}
-	
-	@Test
-	public void deve_obter_laboratorio() {
-		Laboratorio laboratorio = LaboratorioMock.obterLaboratorioAtivo();
-		
-		when(laboratorioRepository.getBy(anyString())).thenReturn(laboratorio);
-		
-		Laboratorio retorno = service.obter("test");
-		
-		assertThat(retorno).isNotNull();
-		assertThat(retorno.toString()).isEqualTo(laboratorio.toString());
+		validaExameService = mock(ValidaExameUsecase.class);
+		service = new ConsultaLaboratorioUsecaseImpl(laboratorioRepository, validaExameService);
 	}
 	
 	@Test
@@ -49,7 +36,7 @@ public class ConsultaLaboratorioServiceImplTest {
 		
 		when(laboratorioRepository.listByStatus(Status.ATIVO)).thenReturn(laboratorios);
 		
-		List<Laboratorio> retorno = service.obterLaboratoriosAtivos();
+		List<Laboratorio> retorno = service.executar();
 		
 		assertThat(retorno).isNotNull().isNotEmpty().hasSize(1);
 	}
