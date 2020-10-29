@@ -46,11 +46,6 @@ Executa operações de leitura/escrita em memória.
 
 
 ### URLS para testes com Swagger
- Produção
-```
-	https://manutencao-laboratorio-exame.herokuapp.com/swagger-ui.html#/
-```
-
 Desenvolvimento
 ```
 	http://localhost:8080/swagger-ui.html#/
@@ -81,12 +76,6 @@ Execute os testes unitários
 Execute a aplicação
 ```
 	$ mvn spring-boot:run
-```
-### Rodando em Produção
-Basta consumir os endponts apartir da url:
-
-```
-	https://manutencao-laboratorio-exame.herokuapp.com/
 ```
 ## Como Usar a API
 
